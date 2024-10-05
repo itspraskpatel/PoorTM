@@ -1,8 +1,32 @@
+import { useEffect, useState } from "react";
 import { Avatar } from "../components/Avatar";
 import { Balance } from "../components/Balance";
 import { InputBox } from "../components/InputBox";
+import axios from "axios";
 
 export function Dashboard (){
+    const[balance,setBalance] = useState("0,000.00")
+    const token = localStorage.getItem("token");
+    
+    useEffect(()=>{
+        
+        const fetchBalance = async()=> {
+            const res = await axios.get("https://poor-tm-backend.vercel.app/api/v1/account/balance",{
+            headers:{
+                Authorization: `Bearer ${token}`}}
+            )
+            //console.log(res)  
+            setBalance(Number(res.data.balance).toFixed(2))
+            //console.log(balance)
+        }
+        fetchBalance()
+
+    },[])
+    
+
+
+    
+
     return(
         <div>
             <div className="bg-gray-100 w-screen h-screen grid grid-rows-10 justify-items-start">
@@ -15,7 +39,7 @@ export function Dashboard (){
             
             
                     <div className="ml-10 mb-14 mt-4">
-                        <Balance value="100.876"></Balance>
+                        <Balance value={balance} ></Balance>
                     </div>
 
                     <div className="w-2/3 ml-10"><InputBox label="Send Money" placeholder="Type Name to Send Money"></InputBox>

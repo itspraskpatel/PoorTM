@@ -12,19 +12,20 @@ export function Signin (){
     const[password,setPassword] = useState("")
     const navigate = useNavigate();
     return(
-        <div className="bg-gray-100 w-screen h-screen grid grid-cols-3 justify-center">
-            <img className="w-36 h-14 mt-2 ml-2 " src = "/poortm.png" ></img>
-            <div className="bg-white w-full h-4/5 shadow-md rounded-xl mt-16">
-                <div className="grid place-items-center pt-4">
+        <div className="bg-gray-100 w-screen h-screen  grid grid-rows-10">
+            <img className="w-36 h-14 mt-2 ml-2 span-row-1" src = "/poortm.png" ></img>
+            <div className="  grid place-items-center span-row-9">
+            <div className="h-full bg-white shadow-md rounded-xl">
+                <div className="grid place-items-center ">
                     <Heading label = "Sign in"></Heading>
                     <SubHeading label = "Enter Details to Signin for PoorTM"></SubHeading>
                 </div>
                 
-                <div className="pr-6 pl-6 pt-12 mb-24">
+                <div className="pr-6 pl-6  mb-16">
                 <InputBox label = "Email"  placeholder = "abc@example.com" onChange={(e)=>{setUsername(e.target.value)}}></InputBox>
                 <InputBox label = "Password" placeholder = "password" type="password" onChange={(e)=>{setPassword(e.target.value);}}></InputBox>
                 </div >
-                <div className="px-10 py-4"> <Button label = "Sign in" onClick={
+                <div className="px-10 "> <Button label = "Sign in" onClick={
                     
                     async()=>{
                     
@@ -45,6 +46,7 @@ export function Signin (){
                     }
                 }}></Button> </div>
                 <BottomWarning label="New User?" buttonText="Signup" to="/signup" ></BottomWarning>
+            </div>
             </div>
             
             

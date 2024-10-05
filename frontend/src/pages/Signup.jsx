@@ -14,10 +14,11 @@ export const Signup = ()=>{
     const navigate = useNavigate();
     return(
         
-        <div className="bg-gray-100 w-screen h-screen grid grid-cols-3 justify-center">
-            <img className="w-36 h-14 mt-2 ml-2 " src= "/poortm.png" ></img>
-            <div className="bg-white w-full h-5/6 shadow-md rounded-xl mt-16">
-                <div className="grid place-items-center pt-4">
+        <div className="bg-gray-100 w-screen h-screen  grid grid-rows-10">
+            <img className="w-36 h-14 mt-2 ml-2 span-row-1" src= "/poortm.png" ></img>
+            <div className="  grid place-items-center span-row-9">
+            <div className="h-full bg-white shadow-md rounded-xl ">
+                <div className="grid place-items-center">
                     <Heading label = "Sign up"></Heading>
                     <SubHeading label = "Enter Details to Signup for PoorTM"></SubHeading>
                 </div>
@@ -28,7 +29,7 @@ export const Signup = ()=>{
                     <InputBox label = "Email"  placeholder = "abc@example.com" onChange={(e)=>{setUsername(e.target.value)}}></InputBox>
                     <InputBox label = "Password" placeholder = "password" type="password" onChange={(e)=>{setPassword(e.target.value);}}></InputBox>
                 </div>
-                <div className="px-10 py-4"> <Button label = "Sign up" onClick={async ()=>{
+                <div className="px-10 "> <Button label = "Sign up" onClick={async ()=>{
                     try {
                         console.log(typeof username)
                         const response = await axios.post("https://poor-tm-backend.vercel.app/api/v1/user/signup",{
@@ -46,7 +47,7 @@ export const Signup = ()=>{
                                 }})
                     } catch (error) {
                         console.log(error)
-                        alert("Wrong Email!!!")
+                        alert("Wrong Email !!!")
                     }
 
 
@@ -54,6 +55,7 @@ export const Signup = ()=>{
                 
                 </div>       
                 <BottomWarning label="Already have an Account?" buttonText="Signin" to="/signin"></BottomWarning>     
+            </div>
             </div>
             
             

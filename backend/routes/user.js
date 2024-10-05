@@ -32,9 +32,9 @@ userRouter.post('/signup', async (req,res)=>{
         return res.status(400).json({status: "error" , message: "wrong inputs"})
     }else{
         const user = await UserData.findOne({username : body.username})
-        console.log(user)
+        // console.log(user)
         if(user){
-            return res.json({status : " error" , message : "User Already Exists"})
+            return res.json({status : "error" , message : "User Already Exists"})
         }
         const initialAmount = randomBalance()
         let dbUser = ""
@@ -54,15 +54,15 @@ userRouter.post('/signin', async (req,res)=>{
     const parser = signinSchema.safeParse(body)
 
     if(!parser.success){
-        return res.status(400).json({status: "error" , message: "wrong inputs"})
+        return res.json({status: "error" , message: "Wrong Inputs"})
     }else{
         const dbUser = await UserData.findOne(body)
         console.log(dbUser)
-        if(!dbUser._id){
-           return res.status(411).json({status : "error" , message : "Wrong Username/password"})
+        if(!dbUser || !dbUser._id){
+           return res.json({status : "error" , message : "Wrong Username/password"})
         }
         const token  = jwt.sign({userId : dbUser._id}, JWT_SECRET)
-        return res.json({status : "sucess" , message : "Login success" , token : token}) 
+        return res.json({status : "success" , message : "Login success" , token : token}) 
 
     }
 })

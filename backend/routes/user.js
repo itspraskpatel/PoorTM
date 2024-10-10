@@ -68,7 +68,7 @@ userRouter.post('/signin', async (req,res)=>{
 
 userRouter.get('/users', async (req,res)=>{
     const filter  = req.query.filter || "";
-    const users = await User.find({
+    const users = await UserData.find({
         $or: [{
             firstName: {
                 "$regex": filter
@@ -78,7 +78,8 @@ userRouter.get('/users', async (req,res)=>{
                 "$regex": filter
             }
         }]
-    })
+    }).limit(10)
+
     res.json({
         user: users.map(user => ({
             username: user.username,

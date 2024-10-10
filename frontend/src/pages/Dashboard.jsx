@@ -10,7 +10,7 @@ export function Dashboard (){
     const[balance,setBalance] = useState("0,000.00")
     const user = useRecoilValue(userAtom)
     const token = localStorage.getItem("token");
-    
+    const[search , setSearch] = useState("")
     useEffect(()=>{
         console.log(user)
         const fetchBalance = async()=> {
@@ -26,10 +26,6 @@ export function Dashboard (){
 
     },[])
     
-
-
-    
-
     return(
         <div>
             <div className="bg-gray-100 w-screen h-screen grid grid-rows-10 justify-items-start">
@@ -46,6 +42,13 @@ export function Dashboard (){
                     </div>
 
                     <div className="w-2/3 ml-10"><InputBox label="Send Money" placeholder="Type Name to Send Money"></InputBox>
+                    <div className="grid grid-rows-10"> reslst
+                        {
+                            async ()=>{
+                                const response = await axios.get(`https://poor-tm-backend.vercel.app/api/v1/user/users?filter=Prashant`)
+                            }
+                        }
+                    </div>
                     </div>
                             
                 </div>

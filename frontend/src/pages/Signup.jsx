@@ -6,7 +6,11 @@ import { BottomWarning } from "../components/BottomWarning"
 import { useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
+import {useRecoilState} from "recoil"
+import { userAtom } from "../atoms/userAtom"
+
 export const Signup = ()=>{
+    const[user,setUser] = useRecoilState(userAtom)
     const[firstName,setFirstName] = useState("")
     const[lastName,setLastName] = useState("")
     const[username,setUsername] = useState("")
@@ -31,7 +35,6 @@ export const Signup = ()=>{
                 </div>
                 <div className="px-10 "> <Button label = "Sign up" onClick={async ()=>{
                     try {
-                        console.log(typeof username)
                         const response = await axios.post("https://poor-tm-backend.vercel.app/api/v1/user/signup",{
                             username,
                             password,
@@ -43,6 +46,11 @@ export const Signup = ()=>{
                                     alert(res.data.message)
                                 }else{
                                     localStorage.setItem("token", res.data.token)
+                                    setUser({
+                                        username : username,
+                                        firstName: firstName,
+                                        lastName: lastName
+                                    })
                                     navigate("/dashboard")
                                 }})
                     } catch (error) {

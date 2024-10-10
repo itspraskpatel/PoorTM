@@ -3,13 +3,16 @@ import { Avatar } from "../components/Avatar";
 import { Balance } from "../components/Balance";
 import { InputBox } from "../components/InputBox";
 import axios from "axios";
+import {useRecoilValue} from "recoil"
+import { userAtom } from "../atoms/userAtom"
 
 export function Dashboard (){
     const[balance,setBalance] = useState("0,000.00")
+    const user = useRecoilValue(userAtom)
     const token = localStorage.getItem("token");
     
     useEffect(()=>{
-        
+        console.log(user)
         const fetchBalance = async()=> {
             const res = await axios.get("https://poor-tm-backend.vercel.app/api/v1/account/balance",{
             headers:{
@@ -32,7 +35,7 @@ export function Dashboard (){
             <div className="bg-gray-100 w-screen h-screen grid grid-rows-10 justify-items-start">
                 <div className="w-50 h-20 mt-2 pl-2  shadow-md w-full bg-white flex justify-between"> 
                     <img className="w-36 h-14 mt-2 ml-2 " src= "/poortm.png" ></img>
-                    <div className="flex items-center"> Hello <Avatar icon = "P"></Avatar></div>
+                    <div className="flex items-center"> Hello <Avatar icon = {user.firstName.charAt(0).toUpperCase()}></Avatar></div>
                     </div>
 
                 <div className="bg-white w-full h-11/12 shadow-md rounded-xl mt-10 row-span-9 ">

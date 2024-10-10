@@ -3,13 +3,15 @@ import { Signup } from "./pages/Signup"
 import { Signin } from "./pages/Signin"
 import { Dashboard } from "./pages/Dashboard"
 import { SendMoney } from "./pages/SendMoney"
+import {RecoilRoot} from "recoil"
 
 function App() {
 
 
   return (
     
-    <div>
+      <RecoilRoot>
+        <div>
       {/* helllo */}
       <BrowserRouter>
         <Routes>
@@ -21,6 +23,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+      </RecoilRoot>
   )
 }
 

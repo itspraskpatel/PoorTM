@@ -6,10 +6,13 @@ import { BottomWarning } from "../components/BottomWarning";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 import { useState } from "react";
+import { useRecoilState } from 'recoil';
+import { userAtom } from "../atoms/userAtom"
 
 export function Signin (){
     const[username,setUsername] = useState("")
     const[password,setPassword] = useState("")
+    const[user,setUser] = useRecoilState(userAtom)
     const navigate = useNavigate();
     return(
         <div className="bg-gray-100 w-screen h-screen  grid grid-rows-10">
@@ -38,6 +41,11 @@ export function Signin (){
                             alert(response.data.message)
                         }else{
                             localStorage.setItem("token",response.data.token)
+                            setUser({
+                                ...user,
+                                firstName : response.data.firstName,
+                                username : username
+                            })
                             navigate("/dashboard")
                         }
                     }catch (error) {

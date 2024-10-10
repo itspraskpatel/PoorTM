@@ -43,7 +43,6 @@ userRouter.post('/signup', async (req,res)=>{
             dbUser = a
             await AccountData.create({userId : a._id , username : a.username, balance : initialAmount})
         })
-        
         const token  = jwt.sign({userId : dbUser._id}, JWT_SECRET)
         return res.json({status : "sucess" , message : "User created successfully" , token : token}) 
     }
@@ -62,13 +61,36 @@ userRouter.post('/signin', async (req,res)=>{
            return res.json({status : "error" , message : "Wrong Username/password"})
         }
         const token  = jwt.sign({userId : dbUser._id}, JWT_SECRET)
-        return res.json({status : "success" , message : "Login success" , token : token}) 
+        return res.json({status : "success" , message : "Login success" , token : token , firstName : dbUser.firstName}) 
 
     }
 })
 
+userRouter.get('/users', async (req,res)=>{
+    const filter  = req.query.filter || "";
+    const users = await User.find({
+        $or: [{
+            firstName: {
+                "$regex": filter
+            }
+        }, {
+            lastName: {
+                "$regex": filter
+            }
+        }]
+    })
+    res.json({
+        user: users.map(user => ({
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            _id: user._id
+        }))
+    })
 
 
+
+})
 module.exports = {
     userRouter
 }

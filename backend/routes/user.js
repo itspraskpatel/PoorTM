@@ -78,7 +78,7 @@ userRouter.get('/users', async (req,res)=>{
                 "$regex": filter
             }
         }]
-    }).limit(10)
+    }).limit(5)
 
     res.json({
         user: users.map(user => ({

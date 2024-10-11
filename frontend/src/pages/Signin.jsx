@@ -37,6 +37,7 @@ export function Signin (){
                             username,
                             password
                         })
+                        console.log(response.data)
                         if(response.data.status == "error" ){
                             alert(response.data.message)
                         }else{

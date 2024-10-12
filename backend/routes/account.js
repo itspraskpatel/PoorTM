@@ -30,19 +30,20 @@ accRouter.post('/transfer', authMiddleware , async(req,res)=>{
         await session.abortTransaction()
         return res.json({status : "error" , message : "Insufficient Funds"})
     }
-
-    const toAccount = await AccountData.findOne({ username: req.query.to }).session(session);
-    
+    const to = req.query.to
+    console.log(to)
+    const toAccount = await AccountData.findOne({ username: to }).session(session);
+    console.log(toAccount)
     if(!toAccount){
         await session.abortTransaction()
         return res.status(404).json({status: "error" , message: "Receiver Account Doesn't Exists"})
     }
     const fromBalance = fromAccount.balance - amount
-    const toBalance = toAccount.balance - amount
-    
+    const toBalance = toAccount.balance + parseInt(amount)
+    console.log(toBalance+"   final bal")
     //deduct
     await AccountData.updateOne({userId : req.userId},{balance : fromBalance}).session(session)
-    await AccountData.updateOne({username : req.to}, {balance : toBalance}).session(session)
+    await AccountData.updateOne({username : to}, {balance : toBalance}).session(session)
 
     // Commit the transaction
     await session.commitTransaction();

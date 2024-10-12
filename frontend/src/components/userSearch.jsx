@@ -39,7 +39,7 @@ export const Users = () => {
             <div className="bg-gray-100 w-screen h-screen grid grid-rows-10 justify-items-start">
                 <div className="w-50 h-20 mt-2 pl-2  shadow-md w-full bg-white flex justify-between"> 
                     <img className="w-36 h-14 mt-2 ml-2 " src= "/poortm.png" ></img>
-                    <div className="flex items-center"> Hello <Avatar icon = {user.firstName.charAt(0)}></Avatar></div>
+                    <div className="flex items-center"> Hello {user.firstName} <Avatar icon = {user.firstName.charAt(0)}></Avatar></div>
                     </div>
 
                 <div className="bg-white w-full h-11/12 shadow-md rounded-xl mt-10 row-span-9 ">

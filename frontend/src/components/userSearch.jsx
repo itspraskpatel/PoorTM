@@ -51,7 +51,7 @@ export const Users = () => {
 
                     <div className="w-2/3 ml-10">
                     <InputBox label="Send Money" placeholder="Type Name to Send Money" onChange={(e)=>{setSearchValue(e.target.value)}}></InputBox>
-                    <div className="grid grid-rows-10">
+                    <div className="grid grid-rows-5">
                     {searchResults.map((user,key) => <User user={user} />)}
                     </div>
                     </div>
@@ -66,7 +66,7 @@ export const Users = () => {
 function User({user}) {
     const navigate = useNavigate();
 
-    return <div className="flex justify-between">
+    return <div className="flex justify-between p-2">
         <div className="flex">
             <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
                 <div className="flex flex-col justify-center h-full text-xl">
@@ -77,15 +77,17 @@ function User({user}) {
                 <div>
                     {user.firstName} {user.lastName}
                 </div>
+                <div>
+                    {user.username}
+                </div>
             </div>
         </div>
 
         <div className="flex flex-col justify-center h-ful">
         <button onClick={(e) => {
-                navigate("/send?id=" + user._id + "&name=" + user.firstName);
-            }} type= "button" className=" text-white bg-gradient-to-r bg-green-600 hover:bg-green-800 focus:ring-2 focus:ring-green-300 font-medium rounded-lg text-2xl ring-1 ring-black">Send Money</button>
+                navigate("/send?username=" + user.username + "&firstName=" + user.firstName +"&lastName=" + user.lastName);
+            }} type= "button" className="bg-gradient-to-r bg-green-600 hover:bg-green-800 focus:ring-2 focus:ring-green-300 font-medium rounded-lg text-2xl ring-1 ring-black"><div className="text-white text-xl px-2 ">Send</div></button>
 
-            {/* //<Button  label={"Send Money"} /> */}
         </div>
     </div>
 }

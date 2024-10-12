@@ -4,6 +4,7 @@ import { Signin } from "./pages/Signin"
 import { Dashboard } from "./pages/Dashboard"
 import { SendMoney } from "./pages/SendMoney"
 import {RecoilRoot} from "recoil"
+import { Sucess } from "./pages/Sucess"
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path = "/signin" element = {<Signin />} />
           <Route path = "/dashboard" element = {<Dashboard />} />
           <Route path = "/send" element = {<SendMoney />} />
+          <Route path = "/success" element = {<Sucess/>} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -47,7 +47,7 @@ accRouter.post('/transfer', authMiddleware , async(req,res)=>{
     // Commit the transaction
     await session.commitTransaction();
     return res.json({
-        status : "sucess" , message: "Transfer successful"
+        status : "success" , message: "Transfer successful"
     });
 })
 

@@ -33,7 +33,7 @@ export const Signup = ()=>{
                     <InputBox label = "Email"  placeholder = "abc@example.com" onChange={(e)=>{setUsername(e.target.value)}}></InputBox>
                     <InputBox label = "Password" placeholder = "password" type="password" onChange={(e)=>{setPassword(e.target.value);}}></InputBox>
                 </div>
-                <div className="px-10 "> <Button label = "Sign up" onClick={async ()=>{
+                <div className="px-10 py-2"> <Button label = "Sign up" onClick={async ()=>{
                     try {
                         const response = await axios.post("https://poor-tm-backend.vercel.app/api/v1/user/signup",{
                             username,
